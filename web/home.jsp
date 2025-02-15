@@ -5,6 +5,9 @@
 --%>
 <%@page import="dal.MovieDAO"%>
 <%@page import="model.Movie"%>
+<%@page import="dal.DiscountDAO"%>
+<%@page import="model.Discount" %>
+
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -204,7 +207,7 @@
                         <img src="image/<%= movie.getImageURL() %>" alt="<%= movie.getTitle() %>">
                         <h3><%= movie.getTitle() %></h3>
                         <p>Thời lượng: <%= movie.getDuration() %> phút</p>
-                        <a href="moviesinfo.jsp?id=<%= movie.getMovieID() %>" class="btn">Info</a>
+                        <a href="movie?id=<%= movie.getMovieID() %>" class="btn">Info</a>
                         <a href="booking.jsp?id=<%= movie.getMovieID() %>" class="btn">Đặt Vé</a>
                     </div>
                     <%
@@ -218,12 +221,24 @@
         <section class="events">
             <h2 class="events-title">Khuyến mãi</h2>
             <div class="event-container">
-                <a href="events.jsp?id=1" class="event">
-                    <img src="image/km1.jpg" alt="Khuyến Mãi 1">                   
+                <%
+            
+                    DiscountDAO discountDAO = new DiscountDAO();
+                    List<Discount> discounts = discountDAO.getAllDiscount();
+                    int count1 = 0;
+                    for (Discount discount : discounts) {
+                    if (count1 >= 2) {
+                                        break; 
+                                    }
+            
+                %>
+                <a href="events.jsp?id=<%= discount.getDiscountID() %>" class="event">
+                    <img src="image/<%= discount.getImageURL() %>" alt="Khuyến Mãi <%= discount.getDiscountID() %>">
                 </a>
-                <a href="events.jsp?id=2" class="event">
-                    <img src="image/km2.jpg" alt="Khuyến Mãi 2">                  
-                </a>
+                <%
+                    count1++;
+                    }
+                %>
             </div>
         </section>
 

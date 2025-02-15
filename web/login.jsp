@@ -16,9 +16,9 @@
         <link rel="stylesheet"  href="css/style.css">
         <title>Login</title>
     </head>
-    <jsp:include page="header.jsp" />
-    <body>
 
+    <body>
+        <jsp:include page="header.jsp" />
         <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form action="#">

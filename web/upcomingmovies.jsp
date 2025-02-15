@@ -111,8 +111,8 @@
                 <img src="image/<%= movie.getImageURL() %>" alt="<%= movie.getTitle() %>">
                 <div class="overlay">
                     <div class="btn-container">
-                        <a href="moviesinfo.jsp?id=<%= movie.getMovieID() %>" class="btn">Info</a>
-                        <a href="booking.jsp?id=<%= movie.getMovieID() %>" class="btn">Booking</a>
+                        <a href="movie?id=<%= movie.getMovieID() %>" class="btn">Info</a>
+                        <a href="booking.jsp?id=<%= movie.getMovieID() %>" class="btn">Đặt vé</a>
                     </div>
 
                 </div>

@@ -103,4 +103,36 @@ public class MovieDAO extends DBContext {
             return movies;
         }
     }
+
+    public Movie getMoviesByID(int movieID) {
+        String sql = "SELECT * FROM Movies WHERE MovieID = ?";
+        Movie movie = null;
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, movieID);
+
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    movie = new Movie();
+                    movie.setMovieID(rs.getInt("MovieID"));
+                    movie.setTitle(rs.getString("Title"));
+                    movie.setGenre(rs.getString("Genre"));
+                    movie.setSummary(rs.getString("Summary"));
+                    movie.setDuration(rs.getInt("Duration"));
+                    movie.setReleaseDate(rs.getDate("ReleaseDate"));
+                    movie.setTrailerURL(rs.getString("TrailerURL"));
+                    movie.setCreatedAt(rs.getTimestamp("CreatedAt"));
+                    movie.setUpdatedAt(rs.getTimestamp("UpdatedAt"));
+                    movie.setImageURL(rs.getString("ImageURL"));
+                    movie.setStatus(rs.getString("Status"));
+                }
+            }
+        } catch (SQLException e) {
+            // In ra thông báo lỗi để debug
+            System.err.println("Lỗi khi truy vấn phim theo ID: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return movie;
+    }
 }
